@@ -80,12 +80,7 @@ var model = {
         return true;
     },
 
-
-
-
-
 };
-
 
 
 model.fire("53");
@@ -105,10 +100,31 @@ model.fire("10");
 /*Objects are good for creating detailed variables*/
 
 var controller = {
-    guesses, //Keeps number of guesses made
-    processGuess //
-
-
-
-
+    guesses: 0, //Keeps number of guesses made
+    processGuess: function (guess) {  //Processes guesses and sends them to the model. Will catch the end of the game.
+    },
+    parseGuess: function (guess) {
+        var alphabet = ["A", "B", "C", "D", "E", "F", "G"];
+        if (guess === null || guess.length !== 2 ) {
+            alert("Please enter  a letter and a number on the board");
+        }
+        else {
+            var firstChar = guess.charAt(0);
+            var row = alphabet.indexOf(firstChar);
+            var column = guess.charAt(1);
+            if (NaN(row) || NaN(column)){
+                alert("That isn't possible to fire there");
+            }
+            else if (row < 0 || column <0 || row >= model.boardSize || column >= model.boardSize){
+                alert("This isn't on the board");
+            }
+            else {
+                return row + column;
+            }
+        }
+        return null;
+    }
 };
+
+
+console.log(parseGuess("A6"));
